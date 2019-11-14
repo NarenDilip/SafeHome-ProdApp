@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App theme basic colors -->
+    <color name="colorAccent">#004D40</color>
+    <color name="colorPrimary">#0c5d6d</color>
+    <color name="colorPrimaryDark">#dd0c5d6d</color>
+    <color name="colorPrimaryLight">#990c5d6d</color>
+
+    <color name="black_overlay">#66000000</color>
+    <!-- Grey color set-->
+    <color name="pale_grey">#e5e6eb</color>
+    <color name="grey">#979797</color>
+    <color name="editTextColor">#636363</color>
+
+    <!-- Tab color set-->
+    <color name="redLineColor">#DF4041</color>
+    <color name="tabSelected">@android:color/white</color>
+    <color name="tabTextColor">#88FFFFFF</color>
+
+    <color name="newgreen">#004D40</color>
+    <color name="barChatGreen">#2cbd6e</color>
+    <color name="barChatBlue">#3b9ce0</color>
+    <color name="barChatOrange">#fdad50</color>
+    <array name="chart_colors">
+        <item>@color/barChatGreen</item>
+        <item>@color/barChatOrange</item>
+        <item>@color/barChatBlue</item>
+    </array>
+
+    <color name="green">#76e076</color>
+
+    <color name="sred">#ff0000</color>
+    <color name="sgreen">#00ff00</color>
+
+    <color name="litegreen">#C5E1A5</color>
+    <color name="litegreay">#EEEEEE</color>
+    <color name="whiter">#FFFFFF</color>
+
+    <color name="transparent">#00000000</color>
+
+
+</resources>

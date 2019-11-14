@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DeviceActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:id="@+id/applayer">
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+            <ImageView
+                    android:id="@+id/addDevice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/check"/>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="10dp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/applayer"
+                  android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/numberfive"
+                app:layout_constraintTop_toBottomOf="@+id/numberfour"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        >
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/deviceNameView"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textColorHint="@android:color/black"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/device_name"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/deviceuid"
+                app:layout_constraintTop_toBottomOf="@+id/numberfour"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        >
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/deviceAccessTokenView"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textColorHint="@android:color/black"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/device_uid"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/devicetype"
+                app:layout_constraintTop_toBottomOf="@+id/numberfour"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        >
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/deviceTypeView"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textColorHint="@android:color/black"
+                    android:layout_height="wrap_content"
+                    android:hint="Device Type"/>
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:name="com.schnell.safehome.DeviceGFragment"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="match_parent"
+        tools:context=".GatewayFragment">
+
+    <LinearLayout
+            android:id="@+id/mainlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal">
+
+        <FrameLayout
+                android:id="@+id/armDevices"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="1dp"
+                android:elevation="5dp"
+                android:background="@color/whiter"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp">
+
+            <ImageView
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_verified_user_black_24dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"/>
+
+            <com.schnell.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Arm"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:layout_gravity="bottom|center"
+                    android:textColor="@color/colorAccent"/>
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/disArmDevices"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:elevation="5dp"
+                android:layout_marginEnd="5dp"
+                android:visibility="gone"
+                android:background="@color/whiter"
+                android:layout_marginStart="5dp">
+
+            <ImageView
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_verified_user_red_24dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"/>
+
+            <com.schnell.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DisArm"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="bottom|center"
+                    android:textColor="@color/colorAccent"/>
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/profile1_selector"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:elevation="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/whiter"
+                android:layout_marginStart="5dp">
+
+            <TextView
+                    android:id="@+id/profile1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_home_black_24dp"/>
+
+            <com.schnell.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="bottom|center"
+                    android:textColor="@color/colorAccent"/>
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/profile2_selector"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:elevation="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/whiter"
+                android:layout_marginStart="5dp">
+
+            <TextView
+                    android:id="@+id/profile2"
+                    android:layout_gravity="center"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:background="@drawable/ic_sleep_green_24dp"
+                    android:textSize="16sp"/>
+
+            <com.schnell.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sleep"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="bottom|center"
+                    android:textColor="@color/colorAccent"/>
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/profile3_selector"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:elevation="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/whiter"
+                android:layout_marginStart="5dp">
+
+            <TextView
+                    android:id="@+id/profile3"
+                    android:layout_gravity="center"
+                    android:layout_width="35dp"
+                    android:background="@drawable/ic_directions_away_green_24dp"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:textSize="16sp"/>
+
+            <com.schnell.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Away"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="bottom|center"
+                    android:textColor="@color/colorAccent"/>
+        </FrameLayout>
+
+
+        <FrameLayout
+                android:id="@+id/settings_selector"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:elevation="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/whiter"
+                android:layout_marginStart="5dp">
+
+            <ImageView
+                    android:id="@+id/settings"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_supervisor_account_black_24dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"/>
+
+            <com.schnell.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="User"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="bottom|center"
+                    android:textColor="@color/colorAccent"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeView"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainlayer"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <com.schnell.widget.TextView
+                    android:id="@+id/infoText"
+                    style="@style/AppTheme.Text.Header.Big"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="No devices here"
+                    android:visibility="gone"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/device_card">
+            </android.support.v7.widget.RecyclerView>
+
+            <com.schnell.widget.TextView
+                    android:text="@string/apply_change"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="15dp"
+                    android:textSize="16sp"
+                    android:background="@drawable/mybutton"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="60dp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/apply_change"/>
+        </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <com.sa90.materialarcmenu.ArcMenu
+            android:id="@+id/arcmenu_android_example_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="60dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:menu_color="@color/newgreen"
+            app:menu_open="arc_left"
+            app:menu_scr="@drawable/ic_touch_app_black_24dp">
+
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/sett"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_settings_white_24dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/factoryreset"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_settings_factory_reset_24dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/history"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/ic_remove_red_eye_black_24dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/gatewayInfo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/router_wireless"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/notifications"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_add_alert_black_24dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/plus"/>
+    </com.sa90.materialarcmenu.ArcMenu>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+            style="@style/SpinKitView.Large.Circle"
+            android:layout_width="80dp"
+            android:visibility="gone"
+            android:layout_height="80dp"
+            android:layout_gravity="top|center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:SpinKit_Color="@color/colorAccent"/>
+
+    <com.schnell.widget.TextView
+            android:id="@+id/dialogtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading ...."
+            android:textColor="@color/colorAccent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_gravity="bottom|center"/>
+
+</android.support.constraint.ConstraintLayout>

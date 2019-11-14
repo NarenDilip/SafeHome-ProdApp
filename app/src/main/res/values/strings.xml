@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Safe Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_device">Device Info</string>
+    <string name="device_name">Device Name</string>
+
+    <string name="no_data_available">Welcome To Easy Secure \n\n You Are just a few steps away from making your safe
+        home
+    </string>
+    <string name="add_gateway">Add Gateway</string>
+    <string name="add_device">Add Device</string>
+    <string name="scanning_qr_code">Scanning QR code...</string>
+    <string name="device_uid">Device UID</string>
+    <string name="apply_change">Apply Profile</string>
+
+
+    //Splash Screen
+    <string name="nointernet">"No Internet Connection Available , Please check Later"</string>
+    <string name="faillogin">"Login Failed"</string>
+    <string name="uname">"narendran.schnell@gmail.com"</string>
+    <string name="pass">"naren1989"</string>
+
+    //layout
+    <string name="ssecure">"Secure Smart.."</string>
+
+    //Dashboard
+    <string name="sosnumber">Please configure Sos numbers User Settings</string>
+    <string name="loaddevice">Loading Devices.....</string>
+    <string name="sosalert">Sos Alert Message From Home Security</string>
+    <string name="failload">Fail to load device groups</string>
+
+
+</resources>

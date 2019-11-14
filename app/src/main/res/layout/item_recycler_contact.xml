@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/my_notification">
+
+    <com.schnell.widget.TextView
+            android:text="Date and Time"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center|center_vertical"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/datetime"/>
+
+    <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="invisible"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/datetime"
+            android:background="@color/colorAccent" android:layout_marginStart="4dp" android:layout_marginEnd="4dp"/>
+
+    <com.schnell.widget.TextView
+            android:text="Device Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:id="@+id/devicename" android:layout_marginStart="32dp" android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.schnell.widget.TextView
+            android:text="Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/redLineColor"
+            android:textSize="18sp"
+            android:id="@+id/alert"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/devicename"
+            app:layout_constraintTop_toTopOf="@+id/devicename" app:layout_constraintStart_toEndOf="@+id/devicename"
+            android:layout_marginStart="39dp"/>
+
+
+</android.support.constraint.ConstraintLayout>

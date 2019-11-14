@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:id="@+id/appBarLayout2">
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+            <ImageView
+                    android:id="@+id/addDevice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/check"/>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/numberone"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/firstno"
+                android:layout_width="match_parent"
+                android:inputType="phone"
+                android:textColor="@android:color/black"
+                android:maxLength="10"
+                android:textSize="16sp"
+                android:textColorHint="@android:color/black"
+                android:layout_height="wrap_content"
+                android:hint="User Mobile Number 1"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/numbertwo"
+            app:layout_constraintTop_toBottomOf="@+id/numberone"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/secondno"
+                android:layout_width="match_parent"
+                android:inputType="phone"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textColorHint="@android:color/black"
+                android:maxLength="10"
+                android:layout_height="wrap_content"
+                android:hint="User Mobile Number 2"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/numberthree"
+            app:layout_constraintTop_toBottomOf="@+id/numbertwo"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/thirdno"
+                android:layout_width="match_parent"
+                android:inputType="phone"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textColorHint="@android:color/black"
+                android:maxLength="10"
+                android:layout_height="wrap_content"
+                android:hint="User Mobile Number 3"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/numberfour"
+            app:layout_constraintTop_toBottomOf="@+id/numberthree"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/fourthno"
+                android:layout_width="match_parent"
+                android:maxLength="10"
+                android:inputType="phone"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textColorHint="@android:color/black"
+                android:hint="User Mobile Number 4"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/numberfive"
+            app:layout_constraintTop_toBottomOf="@+id/numberfour"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/fifthno"
+                android:layout_width="match_parent"
+                android:maxLength="10"
+                android:inputType="phone"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textColorHint="@android:color/black"
+                android:layout_height="wrap_content"
+                android:hint="User Mobile Number 5"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+            android:text="Submit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:background="@color/newgreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/submitbtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/numberfive"
+            android:layout_marginBottom="8dp"/>
+
+</android.support.constraint.ConstraintLayout>
