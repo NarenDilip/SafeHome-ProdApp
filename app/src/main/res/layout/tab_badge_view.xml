@@ -7,7 +7,7 @@
     android:paddingLeft="4dp"
     android:paddingRight="4dp">
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/app_name" />
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
         android:id="@+id/tab_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="horizontal">
@@ -34,7 +35,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"/>
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Arm"
@@ -49,10 +50,9 @@
         <FrameLayout
                 android:id="@+id/disArmDevices"
                 android:layout_width="50dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:elevation="5dp"
                 android:layout_marginEnd="5dp"
-                android:visibility="gone"
                 android:background="@color/whiter"
                 android:layout_marginStart="5dp">
 
@@ -62,7 +62,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"/>
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DisArm"
@@ -78,6 +78,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:elevation="5dp"
+                android:visibility="gone"
                 android:layout_marginEnd="5dp"
                 android:background="@color/whiter"
                 android:layout_marginStart="5dp">
@@ -90,7 +91,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/ic_home_black_24dp"/>
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Home"
@@ -107,6 +108,7 @@
                 android:layout_height="50dp"
                 android:elevation="5dp"
                 android:layout_marginEnd="5dp"
+                android:visibility="gone"
                 android:background="@color/whiter"
                 android:layout_marginStart="5dp">
 
@@ -119,7 +121,7 @@
                     android:background="@drawable/ic_sleep_green_24dp"
                     android:textSize="16sp"/>
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sleep"
@@ -136,6 +138,7 @@
                 android:layout_height="50dp"
                 android:elevation="5dp"
                 android:layout_marginEnd="5dp"
+                android:visibility="gone"
                 android:background="@color/whiter"
                 android:layout_marginStart="5dp">
 
@@ -148,7 +151,7 @@
                     android:gravity="center"
                     android:textSize="16sp"/>
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Away"
@@ -159,12 +162,12 @@
                     android:textColor="@color/colorAccent"/>
         </FrameLayout>
 
-
         <FrameLayout
                 android:id="@+id/settings_selector"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:elevation="5dp"
+                android:visibility="gone"
                 android:layout_marginEnd="5dp"
                 android:background="@color/whiter"
                 android:layout_marginStart="5dp">
@@ -176,7 +179,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"/>
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -201,7 +204,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:id="@+id/infoText"
                     style="@style/AppTheme.Text.Header.Big"
                     android:layout_width="match_parent"
@@ -222,7 +225,7 @@
                     tools:listitem="@layout/device_card">
             </android.support.v7.widget.RecyclerView>
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:text="@string/apply_change"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
@@ -233,12 +236,26 @@
                     android:background="@drawable/mybutton"
                     android:gravity="center"
                     android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="60dp"
                     android:textColor="@android:color/white"
                     android:id="@+id/apply_change"/>
         </LinearLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/notifications"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:visibility="gone"
+            app:fabCustomSize="45dp"
+            app:layout_constraintBottom_toBottomOf="@+id/arcmenu_android_example_layout"
+            android:src="@drawable/ic_add_alert_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/arcmenu_android_example_layout"
+            android:layout_marginStart="24dp"/>
+
 
     <com.sa90.materialarcmenu.ArcMenu
             android:id="@+id/arcmenu_android_example_layout"
@@ -248,6 +265,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="60dp"
             android:layout_marginRight="20dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:menu_color="@color/newgreen"
             app:menu_open="arc_left"
@@ -259,18 +277,19 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 app:fabCustomSize="45dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/ic_settings_white_24dp"/>
 
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/factoryreset"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                app:fabCustomSize="45dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_settings_factory_reset_24dp"/>
+        <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/factoryreset"-->
+                <!--android:layout_width="45dp"-->
+                <!--android:layout_height="45dp"-->
+                <!--app:fabCustomSize="45dp"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--android:src="@drawable/ic_settings_factory_reset_24dp"/>-->
 
         <android.support.design.widget.FloatingActionButton
                 android:id="@+id/history"
@@ -279,6 +298,7 @@
                 app:fabCustomSize="45dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_remove_red_eye_black_24dp"/>
 
         <android.support.design.widget.FloatingActionButton
@@ -287,20 +307,21 @@
                 android:layout_height="45dp"
                 app:fabCustomSize="45dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/router_wireless"/>
 
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/notifications"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                app:fabCustomSize="45dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_add_alert_black_24dp"/>
+        <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/glsettings"-->
+                <!--android:layout_width="45dp"-->
+                <!--android:layout_height="45dp"-->
+                <!--app:fabCustomSize="45dp"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--android:src="@drawable/ic_settings_white_24dp"/>-->
 
         <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
+                android:id="@+id/faber"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 app:fabCustomSize="45dp"
@@ -308,6 +329,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/plus"/>
     </com.sa90.materialarcmenu.ArcMenu>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="60dp"
+            android:layout_marginRight="20dp"
+            app:fabCustomSize="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/plus"/>
 
     <com.github.ybq.android.spinkit.SpinKitView
             style="@style/SpinKitView.Large.Circle"
@@ -321,7 +353,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:SpinKit_Color="@color/colorAccent"/>
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
             android:id="@+id/dialogtext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -335,5 +367,16 @@
             android:textSize="16sp"
             android:gravity="center"
             android:layout_gravity="bottom|center"/>
+
+    <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/diaogdisplayText"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/basic"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

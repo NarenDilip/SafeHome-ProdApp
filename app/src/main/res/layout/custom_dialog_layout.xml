@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp">
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
             android:layout_width="0dp"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@color/colorAccent"
@@ -15,7 +15,7 @@
             android:id="@+id/textView2"/>
 
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
             android:text=" Home Secure !!  Sure you want to Proceed ??"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
             android:text="Proceed"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="100dp"/>
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
             android:text="Cancel"
             android:layout_width="100dp"
             android:gravity="center"

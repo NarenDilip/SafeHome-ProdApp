@@ -10,6 +10,7 @@
         <item name="android:windowDisablePreview">true</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:splitMotionEvents">false</item>
+        <item name="fontFamily">@font/andika</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
@@ -21,6 +22,7 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/andika</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">18sp</item>
@@ -34,6 +36,7 @@
         <item name="android:centerBright">@android:color/transparent</item>
         <item name="android:centerDark">@android:color/transparent</item>
         <item name="android:centerMedium">@android:color/transparent</item>
+        <item name="fontFamily">@font/andika</item>
         <item name="android:fullBright">@android:color/transparent</item>
         <item name="android:fullDark">@android:color/transparent</item>
         <item name="android:topBright">@android:color/transparent</item>

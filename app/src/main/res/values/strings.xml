@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Safe Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -24,7 +25,7 @@
     <string name="pass">"naren1989"</string>
 
     //layout
-    <string name="ssecure">"Secure Smart.."</string>
+    <string name="ssecure">"Home Guard Production"</string>
 
     //Dashboard
     <string name="sosnumber">Please configure Sos numbers User Settings</string>
@@ -32,5 +33,6 @@
     <string name="sosalert">Sos Alert Message From Home Security</string>
     <string name="failload">Fail to load device groups</string>
 
+    <string name="nonetwor">No Network Connection</string>
 
 </resources>

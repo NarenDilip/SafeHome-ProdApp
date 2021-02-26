@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:background="@color/whiter"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/whiter">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -13,41 +12,42 @@
             android:orientation="vertical">
 
         <LinearLayout
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:padding="2dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="2dp">
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:id="@+id/appTitle"
                     style="@style/AppTheme.Text.Header.Big"
-                    android:textColor="@color/colorAccent"
-                    android:layout_height="wrap_content"
                     android:layout_width="0dp"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/app_name"/>
+                    android:text="Secure Simpli"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:id="@+id/sos"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:elevation="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:text="SOS"
-                    android:gravity="center"
-                    android:textSize="14sp"
                     android:layout_gravity="center"
-                    android:background="@drawable/circle_full_red"/>
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/circle_full_red"
+                    android:visibility="gone"
+                    android:elevation="5dp"
+                    android:gravity="center"
+                    android:text="SOS"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
             <RelativeLayout
                     android:layout_width="wrap_content"
@@ -57,40 +57,54 @@
                         android:id="@+id/addGateWay"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:elevation="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="2dp"
                         android:background="@drawable/mybutton"
-                        android:layout_marginStart="5dp">
+                        android:elevation="5dp">
 
-                    <com.schnell.widget.TextView
-                            android:text="Gateway"
+                    <com.salzerproduct.widget.TextView
+                            android:id="@+id/textView5"
                             android:layout_width="wrap_content"
-                            android:textSize="16sp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp"
+                            android:text=" Add Gateway"
                             android:textColor="@android:color/white"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/textView5"/>
+                            android:textSize="16sp" />
                 </FrameLayout>
 
             </RelativeLayout>
 
             <ImageView
                     android:id="@+id/logout"
-                    android:layout_height="35dp"
                     android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/power"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+            <TextView
+                    android:id="@+id/clearbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/circle_full_red"
+                    android:gravity="center"
+                    android:text=" Clear "
+                    android:textColor="@color/whiter"
+                    android:textSize="16sp" />
 
         </LinearLayout>
 
 
-        <com.schnell.widget.BadgeTabLayout
+        <com.salzerproduct.widget.BadgeTabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -99,7 +113,7 @@
                 app:tabIndicatorHeight="3dp"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/editTextColor"/>
+                app:tabTextColor="@color/editTextColor" />
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -108,44 +122,52 @@
                 android:background="@android:color/transparent"
                 android:orientation="vertical">
 
-            <com.schnell.widget.TextView
+            <com.salzerproduct.widget.TextView
                     android:id="@+id/noData"
                     style="@style/AppTheme.Text.Header.Big"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
-                    android:gravity="center"
-                    android:visibility="visible"
-                    android:maxLines="5"
+                    android:layout_height="match_parent"
                     android:background="@android:color/transparent"
+                    android:gravity="center"
                     android:lines="5"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"
+                    android:maxLines="5"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:text="@string/no_data_available"/>
+                    android:text="@string/no_data_available"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
 
             <android.support.v4.view.ViewPager
                     android:id="@+id/viewPager"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-            >
-            </android.support.v4.view.ViewPager>
+                    android:background="@android:color/transparent"/>
         </LinearLayout>
 
     </LinearLayout>
 
-    <com.github.ybq.android.spinkit.SpinKitView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/infoText"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/basic"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/spin_kit"
             style="@style/SpinKitView.Large.Circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:SpinKit_Color="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:SpinKit_Color="@color/colorAccent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

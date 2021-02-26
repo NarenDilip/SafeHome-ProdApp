@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.schnell.safehome">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+          package="com.salzerproduct.safehome">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -14,30 +14,32 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
-            android:allowBackup="true"
+            android:allowBackup="false"
+            tools:replace="android:allowBackup"
             android:icon="@mipmap/ic_home"
             android:label="@string/app_name"
             android:roundIcon="@android:color/white"
             android:supportsRtl="true"
+            android:networkSecurityConfig="@xml/network_security_config"
             android:theme="@style/AppTheme">
 
         <activity
-                android:name=".Dashboard"
+                android:name="com.salzerproduct.safehome.Dashboard"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait"/>
 
         <activity
-                android:name=".LoginActivity"
+                android:name="com.salzerproduct.safehome.LoginActivity"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait"/>
 
         <activity
-                android:name=".NotificationActivity"
+                android:name="com.salzerproduct.safehome.NotificationActivity"
                 android:label="Notification Details"
                 android:screenOrientation="portrait"/>
 
         <activity
-                android:name=".SplashScreen"
+                android:name="com.salzerproduct.safehome.SplashScreen"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait"
@@ -51,7 +53,7 @@
         </activity>
 
         <service
-                android:name=".attention.FcmService"
+                android:name="com.salzerproduct.safehome.attention.FcmService"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
@@ -60,7 +62,7 @@
         </service>
 
         <service
-                android:name=".attention.FcmIdService"
+                android:name="com.salzerproduct.safehome.attention.FcmIdService"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
@@ -69,25 +71,28 @@
         </service>
 
         <activity
-                android:name=".DeviceActivity"
+                android:name="com.salzerproduct.safehome.DeviceActivity"
                 android:label="@string/title_activity_device"
                 android:screenOrientation="portrait">
         </activity>
 
         <activity
-                android:name=".HistoryActivity"
+                android:name="com.salzerproduct.safehome.HistoryActivity"
                 android:label="History Details"
                 android:screenOrientation="portrait"/>
 
         <activity
-                android:name=".UserSettingsActivity"
+                android:name="com.salzerproduct.safehome.UserSettingsActivity"
                 android:label="User Settings"
                 android:screenOrientation="portrait"/>
- 
+
         <activity
-                android:name=".GetDeviceInfoActivity"
+                android:name="com.salzerproduct.safehome.GetDeviceInfoActivity"
                 android:label="Device Details Info"
                 android:screenOrientation="portrait"/>
+
+        <activity android:name="com.salzerproduct.safehome.SettingsActivity"
+                  android:screenOrientation="portrait"/>
 
     </application>
 </manifest>
