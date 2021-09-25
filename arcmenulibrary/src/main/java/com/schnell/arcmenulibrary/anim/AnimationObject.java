@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.schnell.arcmenulibrary.anim;
+package com.salzerproduct.arcmenulibrary.anim;
 
 import android.view.animation.*;
 

@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary.widget;
+package com.salzerproduct.arcmenulibrary.widget;
 
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;

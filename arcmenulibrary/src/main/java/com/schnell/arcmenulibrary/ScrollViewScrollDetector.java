@@ -1,7 +1,7 @@
-package com.schnell.arcmenulibrary;
+package com.salzerproduct.arcmenulibrary;
 
 import android.widget.ScrollView;
-import com.schnell.arcmenulibrary.widget.ObservableScrollView;
+import com.salzerproduct.arcmenulibrary.widget.ObservableScrollView;
 
 /**
  * Created by Mohsen on 1/20/2017.

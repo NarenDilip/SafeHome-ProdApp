@@ -1,10 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: com.sa90.materialarcmenu:library:1.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.aar/b0ac18be66dd64ab46404036e3c8e6ad/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.aar/b0ac18be66dd64ab46404036e3c8e6ad/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c660720aa7452590171b1902621c8d9f/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c660720aa7452590171b1902621c8d9f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c660720aa7452590171b1902621c8d9f/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3bdd211a8b9bf342997e475fb7acf2de/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3bdd211a8b9bf342997e475fb7acf2de/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3bdd211a8b9bf342997e475fb7acf2de/jars/classes.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sa90.materialarcmenu/library/1.4/948449ddbbcf24bdf63c7fcfe0a04874b3033e13/library-1.4-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sa90.materialarcmenu/library/1.4/9d393cbbe34b8f0e7a5813b1afa97b566a466ae0/library-1.4-sources.jar!/" />
     </SOURCES>

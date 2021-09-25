@@ -1,11 +1,11 @@
-package com.schnell.arcmenulibrary.drawable;
+package com.salzerproduct.arcmenulibrary.drawable;
 
 import android.content.res.ColorStateList;
 import android.graphics.*;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
-import com.schnell.arcmenulibrary.util.ColorUtil;
+import com.salzerproduct.arcmenulibrary.util.ColorUtil;
 
 /**
  * Created by Mohsen on 2/21/2017.

@@ -1,12 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.ybq:Android-SpinKit:1.2.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/Android-SpinKit-1.2.0.aar/f19291d6942868cd4908e972406c62b8/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/Android-SpinKit-1.2.0.aar/f19291d6942868cd4908e972406c62b8/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1617a6e6c46ba370eb70d17827ea376f/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1617a6e6c46ba370eb70d17827ea376f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1617a6e6c46ba370eb70d17827ea376f/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/61e6e08c9f534a8aa2ac049968254b1d/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/61e6e08c9f534a8aa2ac049968254b1d/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/61e6e08c9f534a8aa2ac049968254b1d/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ybq/Android-SpinKit/1.2.0/8e167032d90bef21f6e90e39d1b3ee11a8fd33d0/Android-SpinKit-1.2.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ybq/Android-SpinKit/1.2.0/6549c6cdbf38fee6ce7591c7625931238d845bc6/Android-SpinKit-1.2.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary.app;
+package com.salzerproduct.arcmenulibrary.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.util.AttributeSet;
 import android.util.SparseArray;
-import com.schnell.arcmenulibrary.R;
+import com.salzerproduct.arcmenulibrary.R;
 
 
 import java.lang.ref.WeakReference;

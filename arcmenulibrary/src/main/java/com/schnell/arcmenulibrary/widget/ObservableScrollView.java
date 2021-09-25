@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.schnell.arcmenulibrary.widget;
+package com.salzerproduct.arcmenulibrary.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

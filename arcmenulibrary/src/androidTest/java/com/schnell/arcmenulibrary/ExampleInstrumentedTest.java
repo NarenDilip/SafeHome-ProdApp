@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary;
+package com.salzerproduct.arcmenulibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

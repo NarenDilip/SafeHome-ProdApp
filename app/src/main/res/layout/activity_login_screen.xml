@@ -56,7 +56,7 @@
     </android.support.design.widget.TextInputLayout>
 
 
-    <com.schnell.widget.TextView
+    <com.salzerproduct.widget.TextView
             android:text="Submit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

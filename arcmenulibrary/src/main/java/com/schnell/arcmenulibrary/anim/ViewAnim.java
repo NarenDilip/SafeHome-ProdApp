@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary.anim;
+package com.salzerproduct.arcmenulibrary.anim;
 
 import android.view.View;
 import android.view.animation.Animation;

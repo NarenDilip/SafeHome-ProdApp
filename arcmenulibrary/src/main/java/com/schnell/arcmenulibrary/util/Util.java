@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary.util;
+package com.salzerproduct.arcmenulibrary.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
-import com.schnell.arcmenulibrary.R;
+import com.salzerproduct.arcmenulibrary.R;
 
 /**
  * Created by Mohsen on 3/6/2017.

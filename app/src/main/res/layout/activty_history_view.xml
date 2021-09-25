@@ -5,60 +5,176 @@
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-    <android.support.design.widget.AppBarLayout
-            android:layout_height="wrap_content"
+    <ScrollView
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            android:id="@+id/appBarLayout">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-            <ImageView
-                    android:id="@+id/addDevice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/check"/>
-        </android.support.v7.widget.Toolbar>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    </android.support.design.widget.AppBarLayout>
+            <com.salzerproduct.widget.TextView
+                    android:text="Device History"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/textView3"
+                    android:layout_weight="1"/>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1">
+
+                <com.salzerproduct.widget.EditText
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/from_date"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edittext_bg"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="From Date"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"/>
+
+                <com.salzerproduct.widget.EditText
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edittext_bg"
+                        android:id="@+id/from_time"
+                        android:gravity="center"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="From time"
+                        android:layout_margin="5dp"
+                        android:layout_below="@+id/in_date"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"/>
 
 
-    <!--    <com.schnell.widget.TextView-->
-    <!--            android:text="Device History"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            android:background="@color/colorAccent"-->
-    <!--            android:layout_height="50dp"-->
-    <!--            android:textColor="@android:color/white"-->
-    <!--            android:textSize="18sp"-->
-    <!--            android:gravity="center"-->
-    <!--            android:id="@+id/textView"/>-->
+            </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-            android:layout_height="wrap_content"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/totime"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1">
 
-    <!--    <Button-->
-    <!--            android:text="Button"-->
-    <!--            android:background="back"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content" tools:layout_editor_absoluteY="-1dp"-->
-    <!--            tools:layout_editor_absoluteX="3dp" android:id="@+id/button"/>-->
+                <com.salzerproduct.widget.EditText
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/to_date"
+                        android:layout_weight="0.5"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:background="@drawable/edittext_bg"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:hint="To Date"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"/>
+
+                <com.salzerproduct.widget.EditText
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edittext_bg"
+                        android:id="@+id/to_time"
+                        android:gravity="center"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="To Time"
+                        android:layout_margin="5dp"
+                        android:layout_below="@+id/in_date"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1">
+
+                <com.salzerproduct.widget.TextView
+                        android:text="Select Device"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="50dp"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/edittext_bg"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/selectdevice"/>
+
+                <com.salzerproduct.widget.TextView
+                        android:text="SUBMIT"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="50dp"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/mybutton"
+                        android:textColor="@color/whiter"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/submitbtn"/>
+
+            </LinearLayout>
+
+            <com.salzerproduct.widget.TextView
+                    android:text="Selected Device Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:textColor="@color/grey"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:id="@+id/textView6"
+                    android:layout_weight="1"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

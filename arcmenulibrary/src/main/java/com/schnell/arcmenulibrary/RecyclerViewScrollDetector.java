@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.schnell.arcmenulibrary;
+package com.salzerproduct.arcmenulibrary;
 
 
 import android.support.v7.widget.RecyclerView;

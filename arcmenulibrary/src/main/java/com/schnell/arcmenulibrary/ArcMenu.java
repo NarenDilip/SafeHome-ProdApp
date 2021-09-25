@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.schnell.arcmenulibrary;
+package com.salzerproduct.arcmenulibrary;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -41,14 +41,14 @@ import android.view.ViewGroup;
 import android.view.animation.*;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.*;
-import com.schnell.arcmenulibrary.anim.AnimationObject;
-import com.schnell.arcmenulibrary.anim.ViewAnim;
-import com.schnell.arcmenulibrary.interfaces.ScrollDirectionListener;
-import com.schnell.arcmenulibrary.util.Util;
-import com.schnell.arcmenulibrary.widget.ArcLayout;
-import com.schnell.arcmenulibrary.widget.FloatingActionButton;
-import com.schnell.arcmenulibrary.widget.MoveUpwardBehavior;
-import com.schnell.arcmenulibrary.widget.ObservableScrollView;
+import com.salzerproduct.arcmenulibrary.anim.AnimationObject;
+import com.salzerproduct.arcmenulibrary.anim.ViewAnim;
+import com.salzerproduct.arcmenulibrary.interfaces.ScrollDirectionListener;
+import com.salzerproduct.arcmenulibrary.util.Util;
+import com.salzerproduct.arcmenulibrary.widget.ArcLayout;
+import com.salzerproduct.arcmenulibrary.widget.FloatingActionButton;
+import com.salzerproduct.arcmenulibrary.widget.MoveUpwardBehavior;
+import com.salzerproduct.arcmenulibrary.widget.ObservableScrollView;
 
 /**
  deprecated @CoordinatorLayout.DefaultBehavior(MoveUpwardBehavior.class)

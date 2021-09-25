@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary.util;
+package com.salzerproduct.arcmenulibrary.util;
 
 import android.graphics.Color;
 

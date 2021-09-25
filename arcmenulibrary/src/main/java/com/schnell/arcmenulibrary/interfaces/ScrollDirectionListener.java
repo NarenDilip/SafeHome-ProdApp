@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.schnell.arcmenulibrary.interfaces;
+package com.salzerproduct.arcmenulibrary.interfaces;
 
 public interface ScrollDirectionListener {
 	void onScrollDown();

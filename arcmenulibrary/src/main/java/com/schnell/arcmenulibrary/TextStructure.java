@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary;
+package com.salzerproduct.arcmenulibrary;
 
 public class TextStructure {
     public int    h;

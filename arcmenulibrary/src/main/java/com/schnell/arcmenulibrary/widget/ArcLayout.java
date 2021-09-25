@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.schnell.arcmenulibrary.widget;
+package com.salzerproduct.arcmenulibrary.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -26,8 +26,8 @@ import android.view.View;
 import android.view.animation.*;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.RelativeLayout;
-import com.schnell.arcmenulibrary.TextStructure;
-import com.schnell.arcmenulibrary.anim.RotateAndTranslateAnimation;
+import com.salzerproduct.arcmenulibrary.TextStructure;
+import com.salzerproduct.arcmenulibrary.anim.RotateAndTranslateAnimation;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: android.arch.lifecycle:viewmodel:1.1.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/878963086a159d60393183da01e463c4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/878963086a159d60393183da01e463c4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15914249299b35a37682c88eaa560440/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15914249299b35a37682c88eaa560440/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15914249299b35a37682c88eaa560440/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/90d0893c80219621e147e981429c8615/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/90d0893c80219621e147e981429c8615/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/90d0893c80219621e147e981429c8615/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

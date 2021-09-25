@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HomeSecurity-ProductionApp.iml" filepath="$PROJECT_DIR$/HomeSecurity-ProductionApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/HomeSecurity-ProductionApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/HomeSecurity-ProductionApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/HomeSecurity-ProductionApp.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/HomeSecurity-ProductionApp.library.iml" />
     </modules>
   </component>
 </project>

@@ -1,8 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: android.arch.lifecycle:livedata:1.1.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/e390db04d52a6e0f25231a35c7e753bd/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/e390db04d52a6e0f25231a35c7e753bd/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/215af334c2037f38b59280e7f20178e8/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/215af334c2037f38b59280e7f20178e8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/215af334c2037f38b59280e7f20178e8/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/201bae4826709af0d76d889688bcfb18/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/201bae4826709af0d76d889688bcfb18/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/201bae4826709af0d76d889688bcfb18/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

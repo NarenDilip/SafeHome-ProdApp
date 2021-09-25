@@ -1,4 +1,4 @@
-package com.schnell.arcmenulibrary.drawable;
+package com.salzerproduct.arcmenulibrary.drawable;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,9 +16,9 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
-import com.schnell.arcmenulibrary.R;
-import com.schnell.arcmenulibrary.util.ColorUtil;
-import com.schnell.arcmenulibrary.util.Util;
+import com.salzerproduct.arcmenulibrary.R;
+import com.salzerproduct.arcmenulibrary.util.ColorUtil;
+import com.salzerproduct.arcmenulibrary.util.Util;
 
 public class RippleDrawable extends Drawable implements Animatable,	OnTouchListener {
 	
