@@ -20,13 +20,11 @@ class ShowHistory : AppCompatActivity(), View.OnClickListener {
 
         fromdate.setOnClickListener(this)
         todate.setOnClickListener(this)
-
     }
 
     override fun onClick(v: View) {
 
         if (v === fromdate) {
-
             // Get Current Date
             val c = Calendar.getInstance()
             mYear = c.get(Calendar.YEAR)

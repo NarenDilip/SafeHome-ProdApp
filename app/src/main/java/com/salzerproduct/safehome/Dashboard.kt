@@ -201,7 +201,8 @@ class Dashboard : AppCompatActivity(), ResponseListener {
 
         clearbtn.setOnClickListener {
 
-            val devicelist  = DatabaseClient.getInstance(applicationContext).appDatabase.addDeviceDAO.devices
+            val devicelist =
+                DatabaseClient.getInstance(applicationContext).appDatabase.addDeviceDAO.devices
 
             if (devicelist!!.isNotEmpty()) {
                 val databaseClient = DatabaseClient.getInstance(applicationContext).appDatabase
@@ -239,18 +240,18 @@ class Dashboard : AppCompatActivity(), ResponseListener {
 //                desc = resources.getString(R.string.loaddevice)
 //            )
 
-        infoText.visibility = View.VISIBLE
+//        infoText.visibility = View.VISIBLE
 
         // gettings entity group device list details
-        ThingsManager.getEntityGroupsForDevice(c = this)
+//        ThingsManager.getEntityGroupsForDevice(c = this)
     } catch (e: Exception) {
         e.printStackTrace()
     }
 
     private fun initGateways() {
         pagerAdapter.clear()
-        for (i in 0 until deviceGroups.size) {
-            val device = deviceGroups[i]
+//        for (i in 0 until deviceGroups.size) {
+//            val device = deviceGroups[i]
 
 //            for (i in 0 until devicelist.size) {
 //                if (device.name == devicelist[i].devicename) {
@@ -262,27 +263,32 @@ class Dashboard : AppCompatActivity(), ResponseListener {
 //                }
 //            }
 //            AppPreference.put(applicationContext, "Gw", "GW0016")
-            val ds = AppPreference.get(applicationContext, "Gw", "")
-            if (!ds.isNullOrEmpty()) {
-                if (device.name != "All") {
-                    if (device.name == ds) {
-                        pagerAdapter.addFragment(
-                            GatewayFragment.newInstance(
-                                device.id!!.id!!,
-                                pagerAdapter.count,
-                                strUser,
-                                device.getDisplayName()
-                            ),
-                            device.name!!
-                        )
-                        DeviceGId = device.id!!.id!!
-                    }
-                }
-            } else {
-                Toast.makeText(applicationContext, "No Gateway Details Found", Toast.LENGTH_SHORT)
-                    .show()
-            }
+
+        var devUid = AppPreference.get(applicationContext, "DeviceUid", "")
+        var devName = AppPreference.get(applicationContext, "DeviceName", "")
+
+//            val ds = AppPreference.get(applicationContext, "Gw", "")
+//            if (!ds.isNullOrEmpty()) {
+//                if (device.name != "All") {
+//                    if (device.name == ds) {
+        if (devUid!!.isNotEmpty()) {
+            pagerAdapter.addFragment(
+                GatewayFragment.newInstance(
+                    devUid!!,
+                    pagerAdapter.count,
+                    strUser,
+                    devName!!
+                ),
+                devName!!
+            )
+            DeviceGId = devUid
+//                    }
+//                }
+        } else {
+            Toast.makeText(applicationContext, "No Gateway Details Found", Toast.LENGTH_SHORT)
+                .show()
         }
+//        }
 
         if (pagerAdapter.getAll().isEmpty()) {
             noData.visibility = View.VISIBLE
@@ -296,12 +302,11 @@ class Dashboard : AppCompatActivity(), ResponseListener {
         }
     }
 
-
     private fun callloginmethod() {
         ThingsManager.login(
             c = this,
-            username = "boopathi.schnell@gmail.com",
-            password = "aa123"
+            username = "hgss@schnellenergy.com",
+            password = "ce1hg"+"$"+"s"
 //            username = "hgss@gmail.com",
 //            password = "schnell@321"
         )
@@ -354,7 +359,7 @@ class Dashboard : AppCompatActivity(), ResponseListener {
                 return
             }
 
-            if (r.message == "Token has expired" || r.errorCode == 11 && r.status == 401) {
+            if (r.message == "Token has expired" || r.message == "Authentication failed"  || r.errorCode == 11 && r.status == 401 && r.status == 503) {
                 callloginmethod()
             }
 

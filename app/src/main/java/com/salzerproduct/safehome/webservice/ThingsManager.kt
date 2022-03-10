@@ -56,6 +56,7 @@ open class ThingsManager {
             const val logout = "/api/auth/logout"
             const val getDeviceCurrentState =
                 "/api/plugins/telemetry/DEVICE"
+            const val getRelatedDeviceFromAsset = "/api/relations"
         }
     }
 
@@ -118,6 +119,22 @@ open class ThingsManager {
                 )
                 fillCommons(c = c, r = client)
                 client.execute(c as ResponseListener, User::class.java)
+            } catch (e: Exception) {
+                throw e
+            }
+        }
+
+        fun getrelations(c: Context,l: ResponseListener, fromid: String, fromtype: String, Saccount: String) {
+            try {
+                // Generating Req
+                val client = RestClient(
+                    c,
+                    Request.Method.GET,
+                    constructUrl("${API.getRelatedDeviceFromAsset}" + "?fromId=" + fromid + "&fromType=" + fromtype),
+                    API.getRelatedDeviceFromAsset.hashCode()
+                )
+                fillCommons(c = c, r = client)
+                client.execute(l = l , responseType = FromAddress::class.java)
             } catch (e: Exception) {
                 throw e
             }

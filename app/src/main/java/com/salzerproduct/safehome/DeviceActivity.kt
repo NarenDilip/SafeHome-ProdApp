@@ -39,6 +39,8 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
     private var device: Device? = null
     private var isGateway = false
     private var deviceId = ""
+    private var deviceIdDetails = ""
+    private var deviceNameDetails = ""
     private var entityGroupId = ""
     private var gatewayDeviceId = ""
     private var deviceIndex = 0
@@ -108,6 +110,9 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device)
         setSupportActionBar(toolbar)
+
+
+
         checkCameraPermission(activity = this)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -152,25 +157,24 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
             if (deviceNameView.text.toString().isNotEmpty() && deviceTypeView.text.toString()
                     .isNotEmpty() && deviceAccessTokenView.text.toString().isNotEmpty()
             ) {
+
                 if (isGateway) {
-                    if (entityGroupId.isEmpty()) {
+                    if (deviceTypeView.text.toString() == "gw") {
+//                    if (entityGroupId.isEmpty()) {
                         AppDialogs.showProgressDialog(
                             context = this,
                             desc = "Adding Gateway configuration..."
                         )
-                        DeviceSetup = true
-
-                        ThingsManager.saveEntityGroup(
-                            c = this,
-                            groupName = deviceNameView.text.toString(),
-                            description = "Security Gateway",
-                            displayName = deviceNameView.text.toString()
-                        )
+//                        DeviceSetup = true
                         AppPreference.put(applicationContext, "Gw", deviceNameView.text.toString())
 
-                    } else {
+//                    } else {
                         DeviceSetup = false
                         addDeviceToServer()
+//                    }
+                    } else {
+                        Toast.makeText(applicationContext, "Invalid Gateway", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 } else {
                     AppDialogs.showProgressDialog(
@@ -230,6 +234,12 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
     }
 
     fun addDeviceToGateway() {
+
+        AppDialogs.showProgressDialog(
+            context = this!!,
+            desc = "Please wait adding device from gateway"
+        )
+
         val rpcJson = JSONObject()
         val params = JSONObject()
         params.put("devIndex", "$deviceIndex".padStart(2, '0'))
@@ -342,6 +352,9 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
                         } else {
                             if (isGateway) {
                                 gatewayDeviceId = device!!.id!!.id!!
+
+                                deviceIdDetails = device!!.id!!.id!!
+                                deviceNameDetails = r.getDisplayName()
 
                                 var Devicedetails = AppPreference.get(this, "DeviceSos", "")
                                 if (Devicedetails!!.isEmpty()) {
@@ -517,6 +530,17 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
                             devicename.devicename = devnName
                             DatabaseClient.getInstance(applicationContext).appDatabase!!.deviceNameDAO.insert(
                                 devicename
+                            )
+
+                            AppPreference.put(
+                                applicationContext,
+                                "DeviceUid",
+                                deviceIdDetails
+                            )
+                            AppPreference.put(
+                                applicationContext,
+                                "DeviceName",
+                                deviceNameDetails
                             )
                         }
 

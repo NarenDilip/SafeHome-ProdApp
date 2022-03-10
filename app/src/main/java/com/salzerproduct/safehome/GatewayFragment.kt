@@ -32,6 +32,7 @@ import com.salzerproduct.safehome.Utils.BaseActivity
 import com.salzerproduct.safehome.model.*
 import com.salzerproduct.safehome.webservice.ThingsManager
 import com.salzerproduct.widget.AppDialogs
+import kotlinx.android.synthetic.main.content_dashboard.*
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.lang.Integer.parseInt
@@ -59,7 +60,8 @@ class GatewayFragment : Fragment(), ResponseListener {
     private var profile2: View? = null
     private var profile3: View? = null
     private var disArmDevices: View? = null
-//    private var ApplyChanges: View? = null
+
+    //    private var ApplyChanges: View? = null
     private var ArmFlow: FrameLayout? = null
     private var pro1: FrameLayout? = null
     private var pro2: FrameLayout? = null
@@ -108,6 +110,10 @@ class GatewayFragment : Fragment(), ResponseListener {
     private val SHOWCASE_ID = "secure_simpli production"
     private var RemovedDeviceindex: String? = ""
     private var entityGWName: String? = null
+
+    private var RelationD: Boolean? = false
+
+    private var relationDevices: ArrayList<String> = arrayListOf()
 
     private var listener: OnDeviceActionTriggered = object : OnDeviceActionTriggered {
         override fun onDeviceButtonSwitched(device: Device?, arm: Boolean) {
@@ -188,7 +194,7 @@ class GatewayFragment : Fragment(), ResponseListener {
                         ThingsManager.callRPCTwoWay(
                             c = activity!!,
                             l = thisFragment,
-                            deviceId = devicedata.deviceid,
+                            deviceId = gatewayDevice!!.id!!.id!!,
                             jsonObject = rpcJson
                         )
 //                        AppDialogs.showProgressDialog(
@@ -286,7 +292,6 @@ class GatewayFragment : Fragment(), ResponseListener {
 //            presentShowcaseSequence()
 
 
-
 //            val deviceIndex = "80"
 //            val rpcJson = JSONObject()
 //            val params = JSONObject()
@@ -316,7 +321,6 @@ class GatewayFragment : Fragment(), ResponseListener {
 //            }
 
 
-
             Handler().postDelayed({
                 var dss = DatabaseClient.getInstance(context!!).appDatabase.addDeviceDAO!!.devices
                 val myentity =
@@ -328,7 +332,28 @@ class GatewayFragment : Fragment(), ResponseListener {
 //                        context = activity!!,
 //                        desc = "Please wait fetching device details"
 //                    )
-                    GetDetails(context!!, entityGroupId!!, thisFragment).execute()
+
+                    var DeviceUid = AppPreference.get(context!!, "DeviceUid", "")
+
+                    if (gatewayDevice == null) {
+                        ThingsManager.getDevice(
+                            c = activity!!,
+                            l = this,
+                            deviceId = DeviceUid!!
+                        )
+                    }else {
+
+                        ThingsManager.getrelations(
+                            c = context!!,
+                            l = thisFragment,
+                            fromid = DeviceUid!!,
+                            fromtype = "DEVICE",
+                            Saccount = "Account"
+                        );
+                    }
+//                    GetDetails(context!!, entityGroupId!!, thisFragment).execute()
+                }else{
+                    callGetState()
                 }
             }, 1000)
 
@@ -589,16 +614,16 @@ class GatewayFragment : Fragment(), ResponseListener {
                 )
             if (myentity.isNotEmpty()) {
                 for (i in 0 until myentity.size) {
-                    if (myentity[i].deviceindex == "0") {
+//                    if (myentity[i].deviceindex == "0") {
 //                        UserLayer!!.visibility = View.GONE
                         ThingsManager.getdevicecurrentState(
                             context!!,
                             thisFragment,
-                            myentity[i].gatewayDeviceId,
+                            myentity[i].entitygroupid,
                             devicename = "Account"
                         )
 //                        callTimerCondition()
-                    }
+//                    }
                 }
             }
 //
@@ -1135,7 +1160,7 @@ class GatewayFragment : Fragment(), ResponseListener {
                         devices.clear()
                         devicesMap.clear()
                         list!!.adapter!!.notifyDataSetChanged()
-
+                        RelationD = false
                         ThingsManager.getDevice(
                             c = context!!,
                             l = this,
@@ -1300,7 +1325,7 @@ class GatewayFragment : Fragment(), ResponseListener {
         }
         try {
 //            AppDialogs.hideProgressDialog()
-            if (r.message == "Token has expired" || r.errorCode == 11 && r.status == 401) {
+            if (r.message == "Token has expired" || r.message == "Authentication failed"  || r.errorCode == 11 && r.status == 401 && r.status == 503) {
                 AppPreference.clearAll(c = activity!!)
                 Snackbar.make(view!!, "Session expired. Please login again", Snackbar.LENGTH_LONG)
                     .show()
@@ -1313,14 +1338,14 @@ class GatewayFragment : Fragment(), ResponseListener {
                     activity!!.finish()
                 }, 2000)
 
-            } else if(r.message == "Requested item wasn't found!"){
+            } else if (r.message == "Requested item wasn't found!") {
                 Toast.makeText(
                     context!!,
-                   "No Device Found",
+                    "No Device Found",
                     Toast.LENGTH_SHORT
                 ).show()
                 DialogTexter!!.visibility = View.GONE
-            }else if (r.statusMessage == "Failure") {
+            } else if (r.statusMessage == "Failure") {
                 DialogTexter!!.visibility = View.INVISIBLE
                 if (StatusSetup == "ArmAll") {
                     StatusId = "1"
@@ -1356,8 +1381,8 @@ class GatewayFragment : Fragment(), ResponseListener {
                 } else if (StatusSetup == "Profile") {
 //                    loadDevices()
                 } else if (StatusSetup == "GetState") {
-                        DialogTexter!!.visibility = View.VISIBLE
-                        loadDevices()
+                    DialogTexter!!.visibility = View.VISIBLE
+                    loadDevices()
                 }
 //                Snackbar.make(
 //                    view!!,
@@ -1457,93 +1482,217 @@ class GatewayFragment : Fragment(), ResponseListener {
                 }
 
                 ThingsManager.API.device.hashCode() -> {
-                    if (GetState == true) {
-                        if (r.requestMethod == Request.Method.DELETE) {
-                            if (r.status == 200) {
-                                DatabaseClient.getInstance(context)
-                                    .appDatabase.addDeviceDAO.DeleteSensor(r.devid!!)
-                                //DELETE DEVICE IN LOCAL DATABASE
-//                                val resultststae = mAddDeviceDAO!!.DeleteSensor(r.devid!!)
-                                loadDevices()
-                            } else {
-                                Snackbar.make(
-                                    view!!,
-                                    "Could not delete device. Please try again",
-                                    Snackbar.LENGTH_LONG
-                                ).show()
+                    if (RelationD == true) {
+                        if (r is Device) {
+//                            for (devsensor in r.deviceList!!) {
+                            val addDevice = AddDevice()
+                            addDevice.devicename = ""
+                            addDevice.deviceuid = r.name!!
+                            addDevice.devicetype = ""
+                            DvalId = r.id!!.id!!
+                            addDevice.deviceid = r.id!!.id!!
+                            addDevice.deviceindex = ""
+                            addDevice.entitygroupid = entityGroupId
+                            addDevice.gatewayDeviceId = r.id!!.id!!
+//                            gatewayDataDeviceId = r.id!!.id!!
+
+                            r.additionalInfo!!.displayName = r.name!!
+
+                            if (entityGWName!!.equals(r.name)) {
+                                addDevice.devicename = entityGWName
+                                addDevice.devicetype = "gw"
+                                gatewayDataDeviceId = r.id!!.id!!
+                                addDevice.deviceindex = "0"
+
+                                val device = Device()
+                                device.name = entityGWName
+                                device.id = r.id!!
+                                device.type = "gw"
+                                DvalId = r.id!!.id!!
+                                gatewayDevice = device
+
+                                AppPreference.put(
+                                    activity!!,
+                                    "gatewaydeviceid",
+                                    entityGroupId!!
+                                )
+                                AppPreference.put(
+                                    activity!!,
+                                    "gdeviceid",
+                                    gatewayDataDeviceId!!
+                                )
+
+                                ThingsManager.addAttribute(
+                                    c = activity!!,
+                                    l = thisFragment,
+                                    deviceId = gatewayDataDeviceId!!
+                                )
                             }
-                            loadDevices()
-                        } else if (r is Device) {
-                            if (r.requestMethod == Request.Method.GET) {
-                                if (!devicesMap.keys.contains(r.id!!.id)) {
-                                    if (r.additionalInfo != null && r.additionalInfo!!.gateway == true) {
-                                        gatewayDevice = r
+
+                            AppPreference.put(context!!, "CustomerOwner", r.ownerId.toString())
+
+                            try {
+                                DatabaseClient.getInstance(context)
+                                    .appDatabase.addDeviceDAO.insert(addDevice)
+                            } catch (e: SQLiteConstraintException) {
+                                System.out.println(e)
+                            }
+
+                            var devicesList = DevicesList()
+                            devicesList.name = r.name
+                            devicesList.type = r.type
+                            devicesList.deviceId = r.id!!.id!!
+
+
+                            DatabaseClient.getInstance(context)
+                                .appDatabase.allDevices!!.insert(devicesList)
+
+                            val deviceDetails =
+                                DatabaseClient.getInstance(context)
+                                    .appDatabase.deviceindex.getDevice(
+                                        gatewayDataDeviceId,
+                                        DvalId
+                                    )
+                            if (deviceDetails == null) {
+                                val deviceConfig = DeviceConfig()
+                                deviceConfig.gatewayid = entityGroupId
+                                deviceConfig.deviceid = DvalId
+                                deviceConfig.devicestatus = "ok"
+                                deviceConfig.devicetype = ""
+                                deviceConfig.deviceindex =
+                                    r.additionalInfo!!.deviceIndex.toString()
+                                deviceConfig.deviceloader = "0"
+                                DatabaseClient.getInstance(context)
+                                    .appDatabase.deviceindex.insert(deviceConfig)
+                            }
+                            getDeviceIndexVal(DvalId!!)
+                        }
+
+//                        AppDialogs.showProgressDialog(
+//                            context = activity!!,
+//                            desc = "Fetching datas from Server.."
+//                        )
+//
+//                        ThingsManager.addAttribute(
+//                            c = activity!!,
+//                            l = thisFragment,
+//                            deviceId = gatewayDataDeviceId!!,
+//                            devicename = "Account"
+//                        )
+//
+//                        val listers = DatabaseClient.getInstance(context).appDatabase!!
+//                            .getuserActivation().devices
+//                        for (i in 0 until listers.size) {
+//
+//                            AppDialogs.showProgressDialog(
+//                                context = activity!!,
+//                                desc = "Fetching datas from Server., Please wait..."
+//                            )
+//
+//                            AuditServiceRequest.updateFcm(
+//                                context,
+//                                listers[i].mobileno,
+//                                listers[i].mobileno,
+//                                FirebaseInstanceId.getInstance().token
+//                            )
+//                        }
+
+//                    AppNewDialogs.showProgressDialog(
+//                        context = thisFragment.context!!,
+//                        desc = "Fetching current or Exact state from Gateway"
+//                    )
+//                        callNewGet()
+//                        callGetState()
+                        lauchLoaderDetails()
+
+                    } else {
+                        if (GetState == true) {
+                            if (r.requestMethod == Request.Method.DELETE) {
+                                if (r.status == 200) {
+                                    DatabaseClient.getInstance(context)
+                                        .appDatabase.addDeviceDAO.DeleteSensor(r.devid!!)
+                                    //DELETE DEVICE IN LOCAL DATABASE
+//                                val resultststae = mAddDeviceDAO!!.DeleteSensor(r.devid!!)
+                                    loadDevices()
+                                } else {
+                                    Snackbar.make(
+                                        view!!,
+                                        "Could not delete device. Please try again",
+                                        Snackbar.LENGTH_LONG
+                                    ).show()
+                                }
+                                loadDevices()
+                            } else if (r is Device) {
+                                if (r.requestMethod == Request.Method.GET) {
+                                    if (!devicesMap.keys.contains(r.id!!.id)) {
+                                        if (r.additionalInfo != null && r.additionalInfo!!.gateway == true) {
+                                            gatewayDevice = r
 //                                    TODO selected profile should be highlighted
-                                    } else {
-                                        var deviceDetails =
-                                            DatabaseClient.getInstance(context)
-                                                .appDatabase.deviceindex.getSDevice(r.id!!.id!!)
-                                        if (deviceDetails != null) {
-                                            var selectedDeviceindex =
+                                        } else {
+                                            var deviceDetails =
                                                 DatabaseClient.getInstance(context)
-                                                    .appDatabase.addDeviceDAO.getDeviceid(r.id!!.id!!)
-
-                                            if (selectedDeviceindex.deviceindex.isNotEmpty()) {
-
-                                                if (!deviceDetails.deviceid.isEmpty()) {
+                                                    .appDatabase.deviceindex.getSDevice(r.id!!.id!!)
+                                            if (deviceDetails != null) {
+                                                var selectedDeviceindex =
                                                     DatabaseClient.getInstance(context)
-                                                        .appDatabase.deviceindex.updatedeviceindex(
-                                                            selectedDeviceindex.deviceindex,
-                                                            r.id!!.id!!
-                                                        )
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.deviceindex.updatedevicetype(
-                                                            selectedDeviceindex.deviceindex,
-                                                            r.type,
-                                                            r.id!!.id!!
-                                                        )
+                                                        .appDatabase.addDeviceDAO.getDeviceid(r.id!!.id!!)
 
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.allDevices!!.updatedeviceindex(
-                                                            selectedDeviceindex.deviceindex,
-                                                            r.id!!.id!!
-                                                        )
+                                                if (selectedDeviceindex.deviceindex.isNotEmpty()) {
+
+                                                    if (!deviceDetails.deviceid.isEmpty()) {
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.deviceindex.updatedeviceindex(
+                                                                selectedDeviceindex.deviceindex,
+                                                                r.id!!.id!!
+                                                            )
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.deviceindex.updatedevicetype(
+                                                                selectedDeviceindex.deviceindex,
+                                                                r.type,
+                                                                r.id!!.id!!
+                                                            )
+
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.allDevices!!.updatedeviceindex(
+                                                                selectedDeviceindex.deviceindex,
+                                                                r.id!!.id!!
+                                                            )
+                                                    }
+                                                } else {
+                                                    if (!deviceDetails.deviceid.isEmpty()) {
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.deviceindex.updatedeviceindex(
+                                                                r.additionalInfo!!.deviceIndex.toString(),
+                                                                r.id!!.id!!
+                                                            )
+
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.allDevices!!.updatedeviceindex(
+                                                                r.additionalInfo!!.deviceIndex.toString(),
+                                                                r.id!!.id!!
+                                                            )
+                                                    }
                                                 }
-                                            } else {
-                                                if (!deviceDetails.deviceid.isEmpty()) {
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.deviceindex.updatedeviceindex(
-                                                            r.additionalInfo!!.deviceIndex.toString(),
-                                                            r.id!!.id!!
-                                                        )
+                                            }
 
+                                            var dsdetails = DatabaseClient.getInstance(context)
+                                                .appDatabase.addDeviceDAO.getDeviceid(r.id!!.id!!)
+                                            if (dsdetails != null) {
+                                                if (!dsdetails.deviceid.isEmpty()) {
                                                     DatabaseClient.getInstance(context)
-                                                        .appDatabase.allDevices!!.updatedeviceindex(
-                                                            r.additionalInfo!!.deviceIndex.toString(),
+                                                        .appDatabase.addDeviceDAO.updateall(
+                                                            r.additionalInfo!!.displayName,
+                                                            dsdetails.deviceindex,
                                                             r.id!!.id!!
                                                         )
                                                 }
                                             }
-                                        }
-
-                                        var dsdetails = DatabaseClient.getInstance(context)
-                                            .appDatabase.addDeviceDAO.getDeviceid(r.id!!.id!!)
-                                        if (dsdetails != null) {
-                                            if (!dsdetails.deviceid.isEmpty()) {
-                                                DatabaseClient.getInstance(context)
-                                                    .appDatabase.addDeviceDAO.updateall(
-                                                        r.additionalInfo!!.displayName,
-                                                        dsdetails.deviceindex,
-                                                        r.id!!.id!!
-                                                    )
-                                            }
-                                        }
 
 
-                                        if (!r.devIndex.equals("0")) {
-                                            if (profileDataStatus == "Arm") {
-                                                r.additionalInfo!!.armState = true
-                                                StatusSetup = "Arm"
+                                            if (!r.devIndex.equals("0")) {
+                                                if (profileDataStatus == "Arm") {
+                                                    r.additionalInfo!!.armState = true
+                                                    StatusSetup = "Arm"
 //                                                try {
 //                                                    AppPreference.put(
 //                                                        context!!,
@@ -1553,20 +1702,20 @@ class GatewayFragment : Fragment(), ResponseListener {
 //                                                } catch (e: java.lang.Exception) {
 //                                                    e.printStackTrace()
 //                                                }
-                                                val attributedatas =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.geAttributesDAO()
-                                                        .getDevicebyUid(r.id!!.id!!)
-                                                if (attributedatas != null) {
-                                                    if (r.id!!.id!!.equals(attributedatas.deviceid)) {
-                                                        r.additionalInfo!!.displayName =
-                                                            attributedatas.devicename
+                                                    val attributedatas =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.geAttributesDAO()
+                                                            .getDevicebyUid(r.id!!.id!!)
+                                                    if (attributedatas != null) {
+                                                        if (r.id!!.id!!.equals(attributedatas.deviceid)) {
+                                                            r.additionalInfo!!.displayName =
+                                                                attributedatas.devicename
+                                                        }
                                                     }
-                                                }
 
-                                            } else if (profileDataStatus == "DisArm") {
-                                                r.additionalInfo!!.armState = false
-                                                StatusSetup = "DisArm"
+                                                } else if (profileDataStatus == "DisArm") {
+                                                    r.additionalInfo!!.armState = false
+                                                    StatusSetup = "DisArm"
 //                                                try {
 //                                                    AppPreference.put(
 //                                                        mContext!!,
@@ -1576,25 +1725,29 @@ class GatewayFragment : Fragment(), ResponseListener {
 //                                                } catch (e: java.lang.Exception) {
 //                                                    e.printStackTrace()
 //                                                }
-                                                val attributedatas =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.geAttributesDAO()
-                                                        .getDevicebyUid(r.id!!.id!!)
-                                                if (attributedatas != null) {
-                                                    if (r.id!!.id!!.equals(attributedatas.deviceid)) {
-                                                        r.additionalInfo!!.displayName =
-                                                            attributedatas.devicename
+                                                    val attributedatas =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.geAttributesDAO()
+                                                            .getDevicebyUid(r.id!!.id!!)
+                                                    if (attributedatas != null) {
+                                                        if (r.id!!.id!!.equals(attributedatas.deviceid)) {
+                                                            r.additionalInfo!!.displayName =
+                                                                attributedatas.devicename
+                                                        }
                                                     }
-                                                }
 
-                                            } else if (profileDataStatus == "okP1") {
-                                                profileDataStatus = "okP1"
-                                                AppPreference.put(context!!, "CurrentState", "okP1")
-                                                val devicedao =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.addDeviceDAO.getEntityGroup(
-                                                            entityGroupId
-                                                        )
+                                                } else if (profileDataStatus == "okP1") {
+                                                    profileDataStatus = "okP1"
+                                                    AppPreference.put(
+                                                        context!!,
+                                                        "CurrentState",
+                                                        "okP1"
+                                                    )
+                                                    val devicedao =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.addDeviceDAO.getEntityGroup(
+                                                                entityGroupId
+                                                            )
 //                                                val stateProfile =
 //                                                    mProfileState!!.getstatebyGw(entityGroupId)
 
@@ -1668,144 +1821,208 @@ class GatewayFragment : Fragment(), ResponseListener {
 
 
 //                                                } else {
-                                                for (i in 0 until devicedao.size) {
-                                                    if (devicedao[i].deviceindex != "") {
-                                                        r.additionalInfo!!.armState = false
-                                                        r.additionalInfo!!.armState =
-                                                            !r.type.equals("ms")
-                                                        r.additionalInfo!!.armState =
-                                                            r.type.equals("ds")
+                                                    for (i in 0 until devicedao.size) {
+                                                        if (devicedao[i].deviceindex != "") {
+                                                            r.additionalInfo!!.armState = false
+                                                            r.additionalInfo!!.armState =
+                                                                !r.type.equals("ms")
+                                                            r.additionalInfo!!.armState =
+                                                                r.type.equals("ds")
 
-                                                        if (devicedao[i].devicetype.equals("ds") || devicedao[i].devicetype.equals(
-                                                                "rm"
-                                                            )
-                                                        ) {
-                                                            P1HashMap.put(
-                                                                devicedao[i].deviceindex,
-                                                                1
-                                                            )
-                                                        } else if (devicedao[i].devicetype.equals(
-                                                                "rm"
-                                                            )
-                                                        ) {
-                                                            P1HashMap.put(
-                                                                devicedao[i].deviceindex,
-                                                                0
-                                                            )
-                                                        } else {
-                                                            P1HashMap.put(
-                                                                devicedao[i].deviceindex,
-                                                                0
-                                                            )
+                                                            if (devicedao[i].devicetype.equals("ds") || devicedao[i].devicetype.equals(
+                                                                    "rm"
+                                                                )
+                                                            ) {
+                                                                P1HashMap.put(
+                                                                    devicedao[i].deviceindex,
+                                                                    1
+                                                                )
+                                                            } else if (devicedao[i].devicetype.equals(
+                                                                    "rm"
+                                                                )
+                                                            ) {
+                                                                P1HashMap.put(
+                                                                    devicedao[i].deviceindex,
+                                                                    0
+                                                                )
+                                                            } else {
+                                                                P1HashMap.put(
+                                                                    devicedao[i].deviceindex,
+                                                                    0
+                                                                )
+                                                            }
                                                         }
                                                     }
-                                                }
-                                                DeviceUnSelectedCount =
-                                                    DeviceUnSelectedCount!! + 1
+                                                    DeviceUnSelectedCount =
+                                                        DeviceUnSelectedCount!! + 1
 
-                                                if (DeviceUnSelectedCount == DeviceSelectedCount!!.minus(
-                                                        1
-                                                    )
-                                                ) {
-
-                                                    var rdevices =
-                                                        AppPreference.get(
-                                                            context!!,
-                                                            "Apply",
-                                                            ""
+                                                    if (DeviceUnSelectedCount == DeviceSelectedCount!!.minus(
+                                                            1
                                                         )
-                                                    if (rdevices == "Profile") {
+                                                    ) {
 
-                                                        if (profileDataStatus == "okP1") {
-                                                            val jObject = JSONObject(P1HashMap)
+                                                        var rdevices =
+                                                            AppPreference.get(
+                                                                context!!,
+                                                                "Apply",
+                                                                ""
+                                                            )
+                                                        if (rdevices == "Profile") {
+
+                                                            if (profileDataStatus == "okP1") {
+                                                                val jObject = JSONObject(P1HashMap as Map<*, *>)
 
 //                                                            AppNewDialogs.showProgressDialog(
 //                                                                context = activity!!,
 //                                                                desc = "Applying Home Profile 1..."
 //                                                            )
 //                                                            updatetext!!.visibility = View.VISIBLE
-                                                            var rpcString =
-                                                                "{\"params\":$jObject,\"method\":\"p1\",\"timeout\":40000}"
-                                                            val obj = JSONObject(rpcString)
+                                                                var rpcString =
+                                                                    "{\"params\":$jObject,\"method\":\"p1\",\"timeout\":40000}"
+                                                                val obj = JSONObject(rpcString)
 
-                                                            AppPreference.put(
-                                                                context!!,
-                                                                "FirstProfile",
-                                                                obj.toString()
-                                                            )
+                                                                AppPreference.put(
+                                                                    context!!,
+                                                                    "FirstProfile",
+                                                                    obj.toString()
+                                                                )
 
-                                                            StatusSetup = "profile"
-                                                            StatusId = "1"
-                                                            profileDataStatus = "Schnell"
+                                                                StatusSetup = "profile"
+                                                                StatusId = "1"
+                                                                profileDataStatus = "Schnell"
 
-                                                            ThingsManager.callRPCTwoWay(
-                                                                c = activity!!,
-                                                                l = thisFragment,
-                                                                deviceId = gatewayDevice!!.id!!.id!!,
-                                                                jsonObject = obj
-                                                            )
+                                                                ThingsManager.callRPCTwoWay(
+                                                                    c = activity!!,
+                                                                    l = thisFragment,
+                                                                    deviceId = gatewayDevice!!.id!!.id!!,
+                                                                    jsonObject = obj
+                                                                )
 //                                                            callTimerCondition()
-                                                            AppPreference.put(
-                                                                context!!,
-                                                                "Apply",
-                                                                ""
-                                                            )
-                                                            DeviceUnSelectedCount = 0
+                                                                AppPreference.put(
+                                                                    context!!,
+                                                                    "Apply",
+                                                                    ""
+                                                                )
+                                                                DeviceUnSelectedCount = 0
+                                                            }
                                                         }
                                                     }
-                                                }
 
-                                                val attributedatas =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.geAttributesDAO()
-                                                        .getDevicebyUid(r.id!!.id!!)
-                                                if (attributedatas != null) {
-                                                    if (r.id!!.id!!.equals(attributedatas.deviceid)) {
-                                                        r.additionalInfo!!.displayName =
-                                                            attributedatas.devicename
+                                                    val attributedatas =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.geAttributesDAO()
+                                                            .getDevicebyUid(r.id!!.id!!)
+                                                    if (attributedatas != null) {
+                                                        if (r.id!!.id!!.equals(attributedatas.deviceid)) {
+                                                            r.additionalInfo!!.displayName =
+                                                                attributedatas.devicename
+                                                        }
                                                     }
-                                                }
 
-                                                StatusSetup = "profile"
-                                                StatusId = "1"
+                                                    StatusSetup = "profile"
+                                                    StatusId = "1"
 
 
-                                            } else if (profileDataStatus == "okP2") {
-                                                AppPreference.put(
-                                                    context!!,
-                                                    "CurrentState",
-                                                    "okP2"
-                                                )
-                                                val devicedao =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.addDeviceDAO.getEntityGroupname(
-                                                            entityGroupId, r.name.toString()
-                                                        )
-                                                val stateProfile =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase!!.profileState.getstatebyGw(
-                                                            entityGroupId
-                                                        )
-                                                if (stateProfile != null) {
-                                                    if (!stateProfile.p2state.isNullOrEmpty()) {
-                                                        val reports = stateProfile.p2state
-                                                        val jresponse =
-                                                            JSONObject(reports.toString())
+                                                } else if (profileDataStatus == "okP2") {
+                                                    AppPreference.put(
+                                                        context!!,
+                                                        "CurrentState",
+                                                        "okP2"
+                                                    )
+                                                    val devicedao =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.addDeviceDAO.getEntityGroupname(
+                                                                entityGroupId, r.name.toString()
+                                                            )
+                                                    val stateProfile =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase!!.profileState.getstatebyGw(
+                                                                entityGroupId
+                                                            )
+                                                    if (stateProfile != null) {
+                                                        if (!stateProfile.p2state.isNullOrEmpty()) {
+                                                            val reports = stateProfile.p2state
+                                                            val jresponse =
+                                                                JSONObject(reports.toString())
 
-                                                        for (i in 0 until devicedao.size) {
-                                                            if (devicedao[i].deviceindex != "") {
-                                                                if (devicedao[i].devicetype != "gw") {
+                                                            for (i in 0 until devicedao.size) {
+                                                                if (devicedao[i].deviceindex != "") {
+                                                                    if (devicedao[i].devicetype != "gw") {
 //                                                                if (r.additionalInfo!!.deviceIndex!!.equals(
 //                                                                        devicedao[i].deviceindex.toInt()
 //                                                                    ))
 //                                                                {
-                                                                    if (jresponse.toString()
-                                                                            .replace("\"", "")
-                                                                            .toString()
-                                                                            .contains(devicedao[i].deviceindex + ":1".toString())
-                                                                    ) {
                                                                         if (jresponse.toString()
-                                                                                .contains(devicedao[i].deviceindex)
+                                                                                .replace("\"", "")
+                                                                                .toString()
+                                                                                .contains(devicedao[i].deviceindex + ":1".toString())
+                                                                        ) {
+                                                                            if (jresponse.toString()
+                                                                                    .contains(
+                                                                                        devicedao[i].deviceindex
+                                                                                    )
+                                                                            ) {
+                                                                                r.additionalInfo!!.armState =
+                                                                                    jresponse.getString(
+                                                                                        devicedao[i].deviceindex
+                                                                                    ) != "0"
+                                                                            } else {
+                                                                                r.additionalInfo!!.armState =
+                                                                                    false
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    val attributedatas =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.geAttributesDAO()
+                                                            .getDevicebyUid(r.id!!.id!!)
+                                                    if (attributedatas != null) {
+                                                        if (r.id!!.id!!.equals(attributedatas.deviceid)) {
+                                                            r.additionalInfo!!.displayName =
+                                                                attributedatas.devicename
+                                                        }
+                                                    }
+                                                    StatusSetup = "profile"
+                                                    StatusId = "2"
+
+                                                } else if (profileDataStatus == "okP3") {
+                                                    AppPreference.put(
+                                                        context!!,
+                                                        "CurrentState",
+                                                        "okP3"
+                                                    )
+                                                    val devicedao =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.addDeviceDAO.getEntityGroupname(
+                                                                entityGroupId, r.name.toString()
+                                                            )
+                                                    val stateProfile =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase!!.profileState.getstatebyGw(
+                                                                entityGroupId
+                                                            )
+                                                    if (stateProfile != null) {
+                                                        if (!stateProfile.p3state.isNullOrEmpty()) {
+                                                            val reports = stateProfile.p3state
+                                                            val jresponse =
+                                                                JSONObject(reports.toString())
+
+                                                            for (i in 0 until devicedao.size) {
+                                                                if (devicedao[i].deviceindex != "") {
+//                                                                if (r.additionalInfo!!.deviceIndex!!.equals(
+//                                                                        devicedao[i].deviceindex.toInt()
+//                                                                    )
+//                                                                ) {
+                                                                    if (devicedao[i].devicetype != "gw") {
+                                                                        if (jresponse.toString()
+                                                                                .replace("\"", "")
+                                                                                .toString()
+                                                                                .contains(devicedao[i].deviceindex + ":1".toString())
                                                                         ) {
                                                                             r.additionalInfo!!.armState =
                                                                                 jresponse.getString(
@@ -1820,168 +2037,108 @@ class GatewayFragment : Fragment(), ResponseListener {
                                                             }
                                                         }
                                                     }
-                                                }
 
-                                                val attributedatas =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.geAttributesDAO()
-                                                        .getDevicebyUid(r.id!!.id!!)
-                                                if (attributedatas != null) {
-                                                    if (r.id!!.id!!.equals(attributedatas.deviceid)) {
-                                                        r.additionalInfo!!.displayName =
-                                                            attributedatas.devicename
+                                                    val attributedatas =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.geAttributesDAO()
+                                                            .getDevicebyUid(r.id!!.id!!)
+                                                    if (attributedatas != null) {
+                                                        if (r.id!!.id!!.equals(attributedatas.deviceid)) {
+                                                            r.additionalInfo!!.displayName =
+                                                                attributedatas.devicename
+                                                        }
                                                     }
-                                                }
-                                                StatusSetup = "profile"
-                                                StatusId = "2"
+                                                    StatusSetup = "profile"
+                                                    StatusId = "3"
 
-                                            } else if (profileDataStatus == "okP3") {
-                                                AppPreference.put(
-                                                    context!!,
-                                                    "CurrentState",
-                                                    "okP3"
-                                                )
-                                                val devicedao =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.addDeviceDAO.getEntityGroupname(
-                                                            entityGroupId, r.name.toString()
-                                                        )
-                                                val stateProfile =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase!!.profileState.getstatebyGw(
-                                                            entityGroupId
-                                                        )
-                                                if (stateProfile != null) {
-                                                    if (!stateProfile.p3state.isNullOrEmpty()) {
-                                                        val reports = stateProfile.p3state
-                                                        val jresponse =
-                                                            JSONObject(reports.toString())
-
-                                                        for (i in 0 until devicedao.size) {
-                                                            if (devicedao[i].deviceindex != "") {
-//                                                                if (r.additionalInfo!!.deviceIndex!!.equals(
-//                                                                        devicedao[i].deviceindex.toInt()
-//                                                                    )
-//                                                                ) {
-                                                                if (devicedao[i].devicetype != "gw") {
-                                                                    if (jresponse.toString()
-                                                                            .replace("\"", "")
-                                                                            .toString()
-                                                                            .contains(devicedao[i].deviceindex + ":1".toString())
-                                                                    ) {
-                                                                        r.additionalInfo!!.armState =
-                                                                            jresponse.getString(
-                                                                                devicedao[i].deviceindex
-                                                                            ) != "0"
-                                                                    } else {
-                                                                        r.additionalInfo!!.armState =
-                                                                            false
-                                                                    }
-                                                                }
-                                                            }
+                                                } else if (profileDataStatus == "Schnell") {
+                                                    val attributedatas =
+                                                        DatabaseClient.getInstance(context)
+                                                            .appDatabase.geAttributesDAO()
+                                                            .getDevicebyUid(r.id!!.id!!)
+                                                    if (attributedatas != null) {
+                                                        if (r.id!!.id!!.equals(attributedatas.deviceid)) {
+                                                            r.additionalInfo!!.displayName =
+                                                                attributedatas.devicename
                                                         }
                                                     }
                                                 }
+                                                devices.add(r)
+                                                devicesMap[r.id!!.id!!] = r
 
-                                                val attributedatas =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.geAttributesDAO()
-                                                        .getDevicebyUid(r.id!!.id!!)
-                                                if (attributedatas != null) {
-                                                    if (r.id!!.id!!.equals(attributedatas.deviceid)) {
-                                                        r.additionalInfo!!.displayName =
-                                                            attributedatas.devicename
-                                                    }
+                                                var despd: Boolean = true
+                                                SelectDeviceUnSelectedCount =
+                                                    SelectDeviceUnSelectedCount!! + 1
+                                                if (SelectDeviceUnSelectedCount == SelectDeviceSelectedCount!!.minus(
+                                                        1
+                                                    )
+                                                ) {
+                                                    despd = false
+                                                    SelectDeviceUnSelectedCount = 0
+                                                    list!!.visibility = View.VISIBLE
+                                                    DialogTexter!!.visibility = View.GONE
                                                 }
-                                                StatusSetup = "profile"
-                                                StatusId = "3"
-
-                                            } else if (profileDataStatus == "Schnell") {
-                                                val attributedatas =
-                                                    DatabaseClient.getInstance(context)
-                                                        .appDatabase.geAttributesDAO()
-                                                        .getDevicebyUid(r.id!!.id!!)
-                                                if (attributedatas != null) {
-                                                    if (r.id!!.id!!.equals(attributedatas.deviceid)) {
-                                                        r.additionalInfo!!.displayName =
-                                                            attributedatas.devicename
-                                                    }
+                                                list!!.adapter!!.notifyDataSetChanged()
+                                                if (despd) {
+                                                    list!!.visibility = View.VISIBLE
+                                                    DialogTexter!!.visibility = View.GONE
                                                 }
                                             }
-                                            devices.add(r)
-                                            devicesMap[r.id!!.id!!] = r
 
-                                            var despd: Boolean = true
-                                            SelectDeviceUnSelectedCount =
-                                                SelectDeviceUnSelectedCount!! + 1
-                                            if (SelectDeviceUnSelectedCount == SelectDeviceSelectedCount!!.minus(
-                                                    1
-                                                )
-                                            ) {
-                                                despd = false
-                                                SelectDeviceUnSelectedCount = 0
-                                                list!!.visibility = View.VISIBLE
-                                                DialogTexter!!.visibility = View.GONE
-                                            }
-                                            list!!.adapter!!.notifyDataSetChanged()
-                                            if (despd) {
-                                                list!!.visibility = View.VISIBLE
-                                                DialogTexter!!.visibility = View.GONE
-                                            }
                                         }
-
+                                        DialogTexter!!.visibility = View.GONE
                                     }
-                                    DialogTexter!!.visibility = View.GONE
-                                }
-                            } else {
-                                if (r.additionalInfo!!.gateway == true) {
-                                    gatewayDevice = r
                                 } else {
-                                    devicesMap[r.id!!.id]!!.additionalInfo = r.additionalInfo
-                                    list!!.adapter!!.notifyDataSetChanged()
-                                }
-                                if (r.extraOutput != null) {
-                                    Snackbar.make(view!!, r.extraOutput!!, Snackbar.LENGTH_LONG)
-                                        .show()
-                                } else {
-                                    Snackbar.make(
-                                        view!!,
-                                        "Updated device ${r.getDisplayName()}",
-                                        Snackbar.LENGTH_LONG
-                                    )
-                                        .show()
+                                    if (r.additionalInfo!!.gateway == true) {
+                                        gatewayDevice = r
+                                    } else {
+                                        devicesMap[r.id!!.id]!!.additionalInfo = r.additionalInfo
+                                        list!!.adapter!!.notifyDataSetChanged()
+                                    }
+                                    if (r.extraOutput != null) {
+                                        Snackbar.make(view!!, r.extraOutput!!, Snackbar.LENGTH_LONG)
+                                            .show()
+                                    } else {
+                                        Snackbar.make(
+                                            view!!,
+                                            "Updated device ${r.getDisplayName()}",
+                                            Snackbar.LENGTH_LONG
+                                        )
+                                            .show()
 //                                    loadDevices()
+                                    }
                                 }
                             }
-                        }
-                    } else {
-                        if (GetState == false) {
-                            if (r is ThingsBoardResponse) {
-                                r.additionalInfo!!.deviceIndex!!
+                        } else {
+                            if (GetState == false) {
+                                if (r is ThingsBoardResponse) {
+                                    r.additionalInfo!!.deviceIndex!!
 
-                                val devicedetails =
-                                    DatabaseClient.getInstance(context!!).appDatabase.addDeviceDAO!!.getDeviceid(
-                                        r.id!!.id!!
-                                    )
-                                val addDevice = AddDevice()
-                                addDevice.devicename = r.additionalInfo!!.displayName
-                                addDevice.deviceuid = devicedetails.deviceuid
-                                addDevice.devicetype = devicedetails.devicetype
-                                addDevice.deviceid = r.id!!.id!!
-                                addDevice.deviceindex = r.additionalInfo!!.deviceIndex!!.toString()
-                                addDevice.entitygroupid = devicedetails.entitygroupid
+                                    val devicedetails =
+                                        DatabaseClient.getInstance(context!!).appDatabase.addDeviceDAO!!.getDeviceid(
+                                            r.id!!.id!!
+                                        )
+                                    val addDevice = AddDevice()
+                                    addDevice.devicename = r.additionalInfo!!.displayName
+                                    addDevice.deviceuid = devicedetails.deviceuid
+                                    addDevice.devicetype = devicedetails.devicetype
+                                    addDevice.deviceid = r.id!!.id!!
+                                    addDevice.deviceindex =
+                                        r.additionalInfo!!.deviceIndex!!.toString()
+                                    addDevice.entitygroupid = devicedetails.entitygroupid
 
-                                try {
-                                    DatabaseClient.getInstance(context!!).appDatabase.addDeviceDAO!!.updateall(
-                                        r.additionalInfo!!.displayName,
-                                        r.additionalInfo!!.deviceIndex!!.toString(),
-                                        r.id!!.id!!
-                                    )
-                                } catch (e: SQLiteConstraintException) {
-                                    System.out.println(e)
+                                    try {
+                                        DatabaseClient.getInstance(context!!).appDatabase.addDeviceDAO!!.updateall(
+                                            r.additionalInfo!!.displayName,
+                                            r.additionalInfo!!.deviceIndex!!.toString(),
+                                            r.id!!.id!!
+                                        )
+                                    } catch (e: SQLiteConstraintException) {
+                                        System.out.println(e)
+                                    }
                                 }
+                                callGetState()
                             }
-                            callGetState()
                         }
                     }
                 }
@@ -2228,12 +2385,12 @@ class GatewayFragment : Fragment(), ResponseListener {
                     } else if (profileDataStatus == "removeDevice") {
 //                        AppNewDialogs.hideProgressDialog()
                         if (r.result != "fail") {
-//                            ThingsManager.deleteDevice(
-//                                c = activity!!,
-//                                l = this,
-//                                deviceId = deviceIdTobeModified!!,
-//                                devicename = "Account"
-//                            )
+
+                            ThingsManager.deleteDevice(
+                                c = activity!!,
+                                l = this,
+                                deviceId = deviceIdTobeModified!!
+                            )
 
                             var profileOneData =
                                 AppPreference.get(context!!, "FirstProfile", "")
@@ -2520,6 +2677,22 @@ class GatewayFragment : Fragment(), ResponseListener {
                     deviceIdTobeModified = null
                     profileDataStatus = "Schnell"
                 }
+
+                ThingsManager.API.getRelatedDeviceFromAsset.hashCode() -> {
+                    if (r is FromAddress) {
+                        if (!r.fromList.isNullOrEmpty()) {
+                            relationDevices.clear()
+                            for (k in 0 until r.fromList!!.size) {
+                                relationDevices.add(r.fromList!!.get(k).to!!.id!!.toString())
+                            }
+                            relationDevices.add(r.fromList!!.get(0).from!!.id!!.toString())
+                        } else {
+                            DialogTexter!!.visibility = View.INVISIBLE
+                        }
+                    }
+                    lauchLoaderDetails()
+                }
+
 
                 ThingsManager.API.telemetryData.hashCode() -> {
 //                    if (r is History) {
@@ -3028,6 +3201,25 @@ class GatewayFragment : Fragment(), ResponseListener {
             }
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
+        }
+    }
+
+    private fun lauchLoaderDetails() {
+        if (relationDevices.isNotEmpty()) {
+            for (p in 0 until 1) {
+                if (p == 0) {
+                    RelationD = true
+                    ThingsManager.getDevice(
+                        c = activity!!,
+                        l = this,
+                        deviceId = relationDevices.get(p)
+                    )
+                    relationDevices.removeAt(p)
+                }
+            }
+        } else {
+//            loadDevices("false")
+            callGetState()
         }
     }
 

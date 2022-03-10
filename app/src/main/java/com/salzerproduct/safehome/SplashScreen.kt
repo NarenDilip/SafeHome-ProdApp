@@ -55,8 +55,8 @@ class SplashScreen : AppCompatActivity(), ResponseListener {
     private fun callloginmethod() {
         ThingsManager.login(
             c = this!!,
-            username = "boopathi.schnell@gmail.com",
-            password = "aa123"
+            username = "hgss@schnellenergy.com",
+            password = "ce1hg"+"$"+"s"
 //            username = "hgss@gmail.com",
 //            password = "schnell@321"
         )
@@ -68,7 +68,7 @@ class SplashScreen : AppCompatActivity(), ResponseListener {
             if (r == null) {
                 return
             }
-            if (r.message == "Token has expired" || r.errorCode == 11 && r.status == 401) {
+            if (r.message == "Token has expired" || r.errorCode == 11 && r.status == 401 || r.message == "Authentication failed") {
                 callloginmethod()
             }
 
