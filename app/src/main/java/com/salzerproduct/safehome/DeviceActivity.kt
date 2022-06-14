@@ -34,6 +34,11 @@ import kotlinx.android.synthetic.main.custom_dialog_layout.*
 import org.json.JSONObject
 import org.json.JSONTokener
 
+// Add device activity this activity is used for passing the new device activity to the
+// server and need to create a relation from the parent devices based on the device addition
+// we need to list the devices in the dashboard, we need to maintain the internet connectivity
+// and reattempt the server request, based on that ui design created and updated.
+
 class DeviceActivity : AppCompatActivity(), ResponseListener,
     QRCodeReaderView.OnQRCodeReadListener {
     private var device: Device? = null
@@ -111,8 +116,6 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
         setContentView(R.layout.activity_device)
         setSupportActionBar(toolbar)
 
-
-
         checkCameraPermission(activity = this)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -167,6 +170,13 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
                         )
 //                        DeviceSetup = true
                         AppPreference.put(applicationContext, "Gw", deviceNameView.text.toString())
+                        if (gatewaymobileno.text.toString().isNotEmpty()) {
+                            AppPreference.put(
+                                applicationContext,
+                                "GwSimNo",
+                                gatewaymobileno.text.toString()
+                            )
+                        }
 
 //                    } else {
                         DeviceSetup = false
@@ -435,11 +445,12 @@ class DeviceActivity : AppCompatActivity(), ResponseListener,
                                     devicestate = "ARMED"
                                 )
 
-//                                ThingsManager.addAttributedevicename(
-//                                    c = this, l = this,
-//                                    deviceId = device!!.id!!.id!!,
-//                                    devicename = deviceNameView.text.toString()
-//                                )
+                                if (gatewaymobileno.text.toString().isNotEmpty()) {
+                                    ThingsManager.addAttributegwmobileno(
+                                        c = this, l = this,
+                                        deviceId = device!!.id!!.id!!,
+                                        devicename = gatewaymobileno.text.toString())
+                                }
 //
 //                                ThingsManager.addAttributeEditdevicename(
 //                                    c = this, l = this,

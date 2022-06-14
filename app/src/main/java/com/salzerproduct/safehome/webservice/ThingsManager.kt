@@ -649,6 +649,32 @@ open class ThingsManager {
             }
         }
 
+        fun addAttributegwmobileno(
+            c: Context,
+            l: ResponseListener,
+            deviceId: String,
+            devicename: String
+        ) {
+            try {
+                // Generating Req`
+                val client = JsonClient(
+                    c, Request.Method.POST,
+                    constructUrl(
+                        API.addAttribute
+                            .replace("{entityValType}", "DEVICE")
+                            .replace("{entityId}", deviceId)
+                            .replace("{scope}", "SHARED_SCOPE")
+                    ), API.addAttribute.hashCode()
+                )
+                fillCommons(c = c, r = client)
+                val jsonObject = JSONObject()
+                jsonObject.put("GwSimNo", devicename)
+                client.execute(l = l, jsonObject = jsonObject, responseType = Response::class.java)
+            } catch (e: Exception) {
+                throw e
+            }
+        }
+
         /**
          * Add devicename as attributes
          */

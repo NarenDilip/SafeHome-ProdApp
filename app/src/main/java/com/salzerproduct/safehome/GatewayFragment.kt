@@ -46,6 +46,14 @@ import kotlin.collections.HashMap
  * [GatewayFragment.OnDeviceActionTriggered] interface.
  */
 
+//  Gateway Fragment, This is the main application dashboard fragment it may contains multiple
+//  profiles, secondary user controller, additional settings options, devices list view with
+//  current status, in this page user can able to controll the gateway via commands, timers also
+//  implemented for every request from device to server attemps and based on current device status
+//  it will display the profile, and other settings options are available in the below icons
+//  of dashboard
+
+
 class GatewayFragment : Fragment(), ResponseListener {
 
     private var swipeView: android.support.v4.widget.SwipeRefreshLayout? = null

@@ -20,4 +20,16 @@
             android:textColor="@color/colorAccent"
             android:layout_marginBottom="55dp"/>
 
+    <com.salzerproduct.widget.TextView
+            android:text="@string/version"
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"
+            android:layout_marginBottom="20dp"/>
+
 </android.support.constraint.ConstraintLayout>

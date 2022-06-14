@@ -20,8 +20,8 @@ android {
         applicationId "com.salzerproduct.safehome"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.2"
+        versionCode 7
+        versionName "1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

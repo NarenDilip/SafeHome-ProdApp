@@ -16,6 +16,9 @@ import com.salzerproduct.util.Utility
 import com.salzerproduct.widget.AppDialogs
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
+// Basic splash screen with timer thread implementataion and data check for navigating the
+// needed activity class
+
 class SplashScreen : AppCompatActivity(), ResponseListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

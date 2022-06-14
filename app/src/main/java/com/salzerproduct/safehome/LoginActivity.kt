@@ -19,6 +19,10 @@ import android.widget.Toast
 import android.content.pm.PackageManager
 import kotlinx.android.synthetic.main.activity_login_screen.toolbar
 
+
+// Login activity, usre validation based on their user mobile number otp validation and gateway qr
+// value is valid , if not valid please show a message to user
+
 class LoginActivity : AppCompatActivity(), ResponseListener {
 
     private val RequestPermissionCode = 1

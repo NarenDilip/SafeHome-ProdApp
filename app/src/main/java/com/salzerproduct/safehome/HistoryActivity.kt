@@ -24,6 +24,11 @@ import kotlinx.android.synthetic.main.item_recycler_contact.*
 import java.util.*
 import java.text.SimpleDateFormat
 
+// Device History, In this page we need to fetch the device details based on the user selected
+// from time and to time , we need to request the device details to the server based on the request
+// time period and fetched details are displayed in the ui design, ui design like list view.
+
+
 class HistoryActivity : AppCompatActivity(), ResponseListener, DeviceDialog.CallBack {
 
     private var mYear: Int = 0

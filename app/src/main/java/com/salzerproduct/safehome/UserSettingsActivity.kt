@@ -15,6 +15,11 @@ import com.salzerproduct.database.model.*
 import kotlinx.android.synthetic.main.activity_user_settings.*
 import kotlinx.android.synthetic.main.activity_user_settings.toolbar
 
+// AddingSecondaryUser , we need to add the secondary user numbers with new numbers and update to
+// server, edit the secondary user, delete the secondary user number, even we need to upate in
+// server too, server updated details will be updated in the ui, we need to fetch the user details
+// from the server and update in the ui fields.
+
 class UserSettingsActivity : AppCompatActivity() {
 
     private var mSosNumbersDAO: SosNumbersDAO? = null

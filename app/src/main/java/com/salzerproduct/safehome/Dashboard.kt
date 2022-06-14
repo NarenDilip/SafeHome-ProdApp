@@ -37,6 +37,12 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 
+// In Dashboard , Profile list we need to display with action oriented and current profile history,
+// secondary user controller option, additional settings options like device history, logout,
+// add device, delete device, change sim card and gateway, device recovery and reset options,
+// we need to display all these items in the dashboard screen based on the user click event we need
+// to acces the application change, ui also designed based on the requirement template.
+
 class Dashboard : AppCompatActivity(), ResponseListener {
 
     private var mLoginUser: User? = null
@@ -51,7 +57,7 @@ class Dashboard : AppCompatActivity(), ResponseListener {
         WriteStoragePermission(activity = this)
         ReadStoragePermission(activity = this)
 
-        strUser = intent.getStringExtra("NewApp")
+        strUser = intent.getStringExtra("NewApp").toString()
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

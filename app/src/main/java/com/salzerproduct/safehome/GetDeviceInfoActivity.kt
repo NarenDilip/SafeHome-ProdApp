@@ -18,6 +18,10 @@ import kotlinx.android.synthetic.main.activity_get_device.deviceNameView
 import kotlinx.android.synthetic.main.activity_get_device.deviceTypeView
 import java.lang.Exception
 
+//  GetDeviceInfo, Showing device related informations to the user like gateway number, gateway uid
+//  and gateway type , we need to fetch the device details from the server and update with the ui
+
+
 class GetDeviceInfoActivity : AppCompatActivity(), ResponseListener {
 
     private var device: Device? = null

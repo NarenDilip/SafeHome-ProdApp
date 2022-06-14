@@ -19,6 +19,10 @@ import com.salzerproduct.safehome.adapter.DeviceNotificationRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_notifications.*
 import java.util.*
 
+// NotificationActivity It contains the list of notifications recieved on the user mobile based on
+// the installed user gateway and other sensor devices, the notification will display in details
+// with recieved time and from which the gateway, ui card design.
+
 class NotificationActivity : AppCompatActivity() {
 
     private var mDeviceDAO: DeviceDAO? = null
